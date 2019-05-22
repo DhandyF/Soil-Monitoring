@@ -51,264 +51,229 @@ export class DashboardComponent implements OnInit {
       polygonSeries.heatRules.push({
         property: "fill",
         target: polygonSeries.mapPolygons.template,
-        min: chart.colors.getIndex(1).brighten(1),
-        max: chart.colors.getIndex(1).brighten(-0.3)
+        min: am4core.color("#FFA07A"),
+        max: am4core.color("#FF0000")
       });
 
       // Make map load polygon data (state shapes and names) from GeoJSON
       polygonSeries.useGeodata = true;
 
-      // // Set heatmap values for each state
-      // polygonSeries.data = [
-      //   {
-      //     id: "US-AL",
-      //     value: 4447100
-      //   },
-      //   {
-      //     id: "US-AK",
-      //     value: 626932
-      //   },
-      //   {
-      //     id: "US-AZ",
-      //     value: 5130632
-      //   },
-      //   {
-      //     id: "US-AR",
-      //     value: 2673400
-      //   },
-      //   {
-      //     id: "US-CA",
-      //     value: 33871648
-      //   },
-      //   {
-      //     id: "US-CO",
-      //     value: 4301261
-      //   },
-      //   {
-      //     id: "US-CT",
-      //     value: 3405565
-      //   },
-      //   {
-      //     id: "US-DE",
-      //     value: 783600
-      //   },
-      //   {
-      //     id: "US-FL",
-      //     value: 15982378
-      //   },
-      //   {
-      //     id: "US-GA",
-      //     value: 8186453
-      //   },
-      //   {
-      //     id: "US-HI",
-      //     value: 1211537
-      //   },
-      //   {
-      //     id: "US-ID",
-      //     value: 1293953
-      //   },
-      //   {
-      //     id: "US-IL",
-      //     value: 12419293
-      //   },
-      //   {
-      //     id: "US-IN",
-      //     value: 6080485
-      //   },
-      //   {
-      //     id: "US-IA",
-      //     value: 2926324
-      //   },
-      //   {
-      //     id: "US-KS",
-      //     value: 2688418
-      //   },
-      //   {
-      //     id: "US-KY",
-      //     value: 4041769
-      //   },
-      //   {
-      //     id: "US-LA",
-      //     value: 4468976
-      //   },
-      //   {
-      //     id: "US-ME",
-      //     value: 1274923
-      //   },
-      //   {
-      //     id: "US-MD",
-      //     value: 5296486
-      //   },
-      //   {
-      //     id: "US-MA",
-      //     value: 6349097
-      //   },
-      //   {
-      //     id: "US-MI",
-      //     value: 9938444
-      //   },
-      //   {
-      //     id: "US-MN",
-      //     value: 4919479
-      //   },
-      //   {
-      //     id: "US-MS",
-      //     value: 2844658
-      //   },
-      //   {
-      //     id: "US-MO",
-      //     value: 5595211
-      //   },
-      //   {
-      //     id: "US-MT",
-      //     value: 902195
-      //   },
-      //   {
-      //     id: "US-NE",
-      //     value: 1711263
-      //   },
-      //   {
-      //     id: "US-NV",
-      //     value: 1998257
-      //   },
-      //   {
-      //     id: "US-NH",
-      //     value: 1235786
-      //   },
-      //   {
-      //     id: "US-NJ",
-      //     value: 8414350
-      //   },
-      //   {
-      //     id: "US-NM",
-      //     value: 1819046
-      //   },
-      //   {
-      //     id: "US-NY",
-      //     value: 18976457
-      //   },
-      //   {
-      //     id: "US-NC",
-      //     value: 8049313
-      //   },
-      //   {
-      //     id: "US-ND",
-      //     value: 642200
-      //   },
-      //   {
-      //     id: "US-OH",
-      //     value: 11353140
-      //   },
-      //   {
-      //     id: "US-OK",
-      //     value: 3450654
-      //   },
-      //   {
-      //     id: "US-OR",
-      //     value: 3421399
-      //   },
-      //   {
-      //     id: "US-PA",
-      //     value: 12281054
-      //   },
-      //   {
-      //     id: "US-RI",
-      //     value: 1048319
-      //   },
-      //   {
-      //     id: "US-SC",
-      //     value: 4012012
-      //   },
-      //   {
-      //     id: "US-SD",
-      //     value: 754844
-      //   },
-      //   {
-      //     id: "US-TN",
-      //     value: 5689283
-      //   },
-      //   {
-      //     id: "US-TX",
-      //     value: 20851820
-      //   },
-      //   {
-      //     id: "US-UT",
-      //     value: 2233169
-      //   },
-      //   {
-      //     id: "US-VT",
-      //     value: 608827
-      //   },
-      //   {
-      //     id: "US-VA",
-      //     value: 7078515
-      //   },
-      //   {
-      //     id: "US-WA",
-      //     value: 5894121
-      //   },
-      //   {
-      //     id: "US-WV",
-      //     value: 1808344
-      //   },
-      //   {
-      //     id: "US-WI",
-      //     value: 5363675
-      //   },
-      //   {
-      //     id: "US-WY",
-      //     value: 493782
-      //   }
-      // ];
+      // Set heatmap values for each state
+      polygonSeries.data = [
+        {
+          id: 19001,
+          value: 4447100
+        },
+        {
+          id: 19003,
+          value: 626932
+        },
+        {
+          id: 19005,
+          value: 5130632
+        },
+        {
+          id: 19007,
+          value: 2673400
+        },
+        {
+          id: 19009,
+          value: 33871648
+        },
+        {
+          id: 19011,
+          value: 4301261
+        },
+        {
+          id: 19013,
+          value: 3405565
+        },
+        {
+          id: 19015,
+          value: 783600
+        },
+        {
+          id: 19017,
+          value: 15982378
+        },
+        {
+          id: 19019,
+          value: 8186453
+        },
+        {
+          id: 19021,
+          value: 1211537
+        },
+        {
+          id: 19023,
+          value: 1293953
+        },
+        {
+          id: 19025,
+          value: 12419293
+        },
+        {
+          id: 19027,
+          value: 6080485
+        },
+        {
+          id: 19029,
+          value: 2926324
+        },
+        {
+          id: 19031,
+          value: 2688418
+        },
+        {
+          id: 19033,
+          value: 4041769
+        },
+        {
+          id: 19035,
+          value: 4468976
+        },
+        {
+          id: 19037,
+          value: 1274923
+        },
+        {
+          id: 19039,
+          value: 5296486
+        },
+        {
+          id: 19041,
+          value: 6349097
+        },
+        {
+          id: 19043,
+          value: 9938444
+        },
+        {
+          id: 19045,
+          value: 4919479
+        },
+        {
+          id: 19047,
+          value: 2844658
+        },
+        {
+          id: 19049,
+          value: 5595211
+        },
+        {
+          id: 19051,
+          value: 902195
+        },
+        {
+          id: 19053,
+          value: 1711263
+        },
+        {
+          id: 19055,
+          value: 1998257
+        },
+        {
+          id: 19057,
+          value: 1235786
+        },
+        {
+          id: 19059,
+          value: 8414350
+        },
+        {
+          id: 19061,
+          value: 1819046
+        },
+        {
+          id: 19063,
+          value: 18976457
+        },
+        {
+          id: 19065,
+          value: 8049313
+        },
+        {
+          id: 19067,
+          value: 642200
+        },
+        {
+          id: 19069,
+          value: 11353140
+        },
+        {
+          id: 19071,
+          value: 3450654
+        },
+        {
+          id: 19073,
+          value: 3421399
+        },
+        {
+          id: 19075,
+          value: 12281054
+        },
+        {
+          id: 19077,
+          value: 1048319
+        },
+        {
+          id: 19079,
+          value: 4012012
+        },
+        {
+          id: 19081,
+          value: 754844
+        },
+        {
+          id: 19083,
+          value: 5689283
+        },
+        {
+          id: 19085,
+          value: 20851820
+        },
+        {
+          id: 19087,
+          value: 2233169
+        },
+        {
+          id: 19089,
+          value: 608827
+        },
+        {
+          id: 19091,
+          value: 7078515
+        },
+        {
+          id: 19093,
+          value: 5894121
+        },
+        {
+          id: 19095,
+          value: 1808344
+        },
+        {
+          id: 19097,
+          value: 5363675
+        },
+        {
+          id: 19099,
+          value: 493782
+        }
+      ];
 
-      // Set up heat legend
-      // var heatLegend = chart.createChild(am4maps.HeatLegend);
-      // heatLegend.id = "heatLegend";
-      // heatLegend.series = polygonSeries;
-      // heatLegend.align = "right";
-      // heatLegend.valign = "bottom";
-      // heatLegend.width = am4core.percent(35);
-      // heatLegend.marginRight = am4core.percent(4);
-      // heatLegend.background.fill = am4core.color("#000");
-      // heatLegend.background.fillOpacity = 0.05;
-      // heatLegend.padding(5, 5, 5, 5);
+      //Configure series tooltip
+      var polygonTemplate = polygonSeries.mapPolygons.template;
+      polygonTemplate.tooltipText = "{name}: {value}";
+      polygonTemplate.nonScalingStroke = true;
+      polygonTemplate.strokeWidth = 0.5;
+      polygonSeries.tooltip.label.interactionsEnabled = true;
+      polygonSeries.tooltip.keepTargetHover = true;
 
-      // // Set up custom heat map legend labels using axis ranges
-      // var minRange = heatLegend.valueAxis.axisRanges.create();
-      // minRange.label.horizontalCenter = "left";
-
-      // var maxRange = heatLegend.valueAxis.axisRanges.create();
-      // maxRange.label.horizontalCenter = "right";
-
-      // // Blank out internal heat legend value axis labels
-      // heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function(labelText) {
-      //   return "";
-      // });
-
-      // // Update heat legend value labels
-      // polygonSeries.events.on("datavalidated", function(ev) {
-      //   var heatLegend = ev.target.map.getKey("heatLegend");
-      //   var min = heatLegend.series.dataItem.values.value.low;
-      //   var minRange = heatLegend.valueAxis.axisRanges.getIndex(0);
-      //   minRange.value = min;
-      //   minRange.label.text = "" + heatLegend.numberFormatter.format(min);
-
-      //   var max = heatLegend.series.dataItem.values.value.high;
-      //   var maxRange = heatLegend.valueAxis.axisRanges.getIndex(1);
-      //   maxRange.value = max;
-      //   maxRange.label.text = "" + heatLegend.numberFormatter.format(max);
-      // });
-      
-      // Configure series tooltip
-      // var polygonTemplate = polygonSeries.mapPolygons.template;
-      // polygonTemplate.tooltipText = "{name}: {value}";
-      // polygonTemplate.nonScalingStroke = true;
-      // polygonTemplate.strokeWidth = 0.5;
-
-      // // Create hover state and set alternative fill color
-      // var hs = polygonTemplate.states.create("hover");
-      // hs.properties.fill = am4core.color("#3c5bdc");
+      // Create hover state and set alternative fill color
+      var hs = polygonTemplate.states.create("hover");
+      hs.properties.fill = am4core.color("#3c5bdc");
+      polygonTemplate.tooltipHTML = '<b>{category}</b><br><a href="https://en.wikipedia.org/wiki/{id}">More info</a>';
 
       var linechart = am4core.create("lineChartDiv", am4charts.XYChart);
 
@@ -333,8 +298,8 @@ export class DashboardComponent implements OnInit {
       dateAxis.renderer.grid.template.location = 0;
       dateAxis.renderer.minGridDistance = 30;
       dateAxis.dateFormats.setKey("second", "ss");
-      // dateAxis.periodChangeDateFormats.setKey("second", "[bold]h:mm a");
-      // dateAxis.periodChangeDateFormats.setKey("minute", "[bold]h:mm a");
+      dateAxis.periodChangeDateFormats.setKey("second", "[bold]h:mm a");
+      dateAxis.periodChangeDateFormats.setKey("minute", "[bold]h:mm a");
       dateAxis.periodChangeDateFormats.setKey("hour", "[bold]h:mm a");
       dateAxis.renderer.inside = true;
       dateAxis.renderer.axisFills.template.disabled = true;

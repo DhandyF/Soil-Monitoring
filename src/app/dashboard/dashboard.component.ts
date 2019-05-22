@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Device } from '../models/device';
 import { DeviceService } from '../service/device.service';
+import { Router } from '@angular/router';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import * as am4charts from "@amcharts/amcharts4/charts";
@@ -16,21 +17,35 @@ am4core.useTheme(am4themes_animated);
 })
 export class DashboardComponent implements OnInit {
   devices: Device[] = [];
+  item: Device;
+  mapsData;
   private chart: am4maps.MapChart;
 
-  constructor(private zone: NgZone, private deviceService: DeviceService) { } 
+  constructor(private zone: NgZone, 
+              private deviceService: DeviceService, 
+              private router: Router) 
+  { } 
 
   ngOnInit() {
-    this.deviceService.getDevices();
+    this.getDevices();
   }
 
   getDevices(): void {
-    this.deviceService.getDevices()
-      .subscribe(devices => this.devices = devices.slice(1, 5));
+    this.deviceService.getDevices().subscribe(items => {
+      this.ngAfterViewInit(items)
+    });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(items: any) {
     this.zone.runOutsideAngular(() => {
+      this.mapsData = items;
+      this.mapsData.forEach(function(v){
+        v.value = v.moisture;
+        delete v.temperature;
+        delete v.kalium;
+        delete v.created_at;
+        delete v.moisture;
+      });
       // Create map instance
       var chart = am4core.create("mapsdiv", am4maps.MapChart);
 
@@ -59,221 +74,23 @@ export class DashboardComponent implements OnInit {
       polygonSeries.useGeodata = true;
 
       // Set heatmap values for each state
-      polygonSeries.data = [
-        {
-          id: 19001,
-          value: 4447100
-        },
-        {
-          id: 19003,
-          value: 626932
-        },
-        {
-          id: 19005,
-          value: 5130632
-        },
-        {
-          id: 19007,
-          value: 2673400
-        },
-        {
-          id: 19009,
-          value: 33871648
-        },
-        {
-          id: 19011,
-          value: 4301261
-        },
-        {
-          id: 19013,
-          value: 3405565
-        },
-        {
-          id: 19015,
-          value: 783600
-        },
-        {
-          id: 19017,
-          value: 15982378
-        },
-        {
-          id: 19019,
-          value: 8186453
-        },
-        {
-          id: 19021,
-          value: 1211537
-        },
-        {
-          id: 19023,
-          value: 1293953
-        },
-        {
-          id: 19025,
-          value: 12419293
-        },
-        {
-          id: 19027,
-          value: 6080485
-        },
-        {
-          id: 19029,
-          value: 2926324
-        },
-        {
-          id: 19031,
-          value: 2688418
-        },
-        {
-          id: 19033,
-          value: 4041769
-        },
-        {
-          id: 19035,
-          value: 4468976
-        },
-        {
-          id: 19037,
-          value: 1274923
-        },
-        {
-          id: 19039,
-          value: 5296486
-        },
-        {
-          id: 19041,
-          value: 6349097
-        },
-        {
-          id: 19043,
-          value: 9938444
-        },
-        {
-          id: 19045,
-          value: 4919479
-        },
-        {
-          id: 19047,
-          value: 2844658
-        },
-        {
-          id: 19049,
-          value: 5595211
-        },
-        {
-          id: 19051,
-          value: 902195
-        },
-        {
-          id: 19053,
-          value: 1711263
-        },
-        {
-          id: 19055,
-          value: 1998257
-        },
-        {
-          id: 19057,
-          value: 1235786
-        },
-        {
-          id: 19059,
-          value: 8414350
-        },
-        {
-          id: 19061,
-          value: 1819046
-        },
-        {
-          id: 19063,
-          value: 18976457
-        },
-        {
-          id: 19065,
-          value: 8049313
-        },
-        {
-          id: 19067,
-          value: 642200
-        },
-        {
-          id: 19069,
-          value: 11353140
-        },
-        {
-          id: 19071,
-          value: 3450654
-        },
-        {
-          id: 19073,
-          value: 3421399
-        },
-        {
-          id: 19075,
-          value: 12281054
-        },
-        {
-          id: 19077,
-          value: 1048319
-        },
-        {
-          id: 19079,
-          value: 4012012
-        },
-        {
-          id: 19081,
-          value: 754844
-        },
-        {
-          id: 19083,
-          value: 5689283
-        },
-        {
-          id: 19085,
-          value: 20851820
-        },
-        {
-          id: 19087,
-          value: 2233169
-        },
-        {
-          id: 19089,
-          value: 608827
-        },
-        {
-          id: 19091,
-          value: 7078515
-        },
-        {
-          id: 19093,
-          value: 5894121
-        },
-        {
-          id: 19095,
-          value: 1808344
-        },
-        {
-          id: 19097,
-          value: 5363675
-        },
-        {
-          id: 19099,
-          value: 493782
-        }
-      ];
+      polygonSeries.data = this.mapsData;
 
       //Configure series tooltip
       var polygonTemplate = polygonSeries.mapPolygons.template;
-      polygonTemplate.tooltipText = "{name}: {value}";
+      polygonTemplate.tooltipText = "{id}: {value}";
       polygonTemplate.nonScalingStroke = true;
       polygonTemplate.strokeWidth = 0.5;
-      polygonSeries.tooltip.label.interactionsEnabled = true;
-      polygonSeries.tooltip.keepTargetHover = true;
+
+      polygonTemplate.events.on("hit", function(ev) {
+        this.router.navigate(['/device/',ev.target.dataItem.dataContext.id]);
+        
+        console.log(ev.target.dataItem.dataContext.id);
+      }, this);
 
       // Create hover state and set alternative fill color
       var hs = polygonTemplate.states.create("hover");
       hs.properties.fill = am4core.color("#3c5bdc");
-      polygonTemplate.tooltipHTML = '<b>{category}</b><br><a href="https://en.wikipedia.org/wiki/{id}">More info</a>';
 
       var linechart = am4core.create("lineChartDiv", am4charts.XYChart);
 
@@ -346,12 +163,15 @@ export class DashboardComponent implements OnInit {
           interval = setInterval(function() {
               visits =
                   visits + Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 5);
+              if (visits < 0) {
+                visits = 0;
+              }
               let lastdataItem = series.dataItems.getIndex(series.dataItems.length - 1);
               linechart.addData(
                   { date: new Date(lastdataItem.dateX.getTime() + 1000*3600), value: visits },
                   1
               );
-          }, 1000);
+          }, 5000);
       }
 
       startInterval();
@@ -378,19 +198,19 @@ export class DashboardComponent implements OnInit {
       })
 
       // this makes date axis labels which are at equal minutes to be rotated
-      dateAxis.renderer.labels.template.adapter.add("rotation", function (rotation, target) {
-          let dataItem = target.dataItem;
-          if (dataItem.date && dataItem.date.getTime() == am4core.time.round(new Date(dataItem.date.getTime()), "minute").getTime()) {
-              target.verticalCenter = "middle";
-              target.horizontalCenter = "left";
-              return -90;
-          }
-          else {
-              target.verticalCenter = "bottom";
-              target.horizontalCenter = "middle";
-              return 0;
-          }
-      })
+      // dateAxis.renderer.labels.template.adapter.add("rotation", function (rotation, target) {
+      //     let dataItem = target.dataItem;
+      //     if (dataItem.dates && dataItem.date.getTime() == am4core.time.round(new Date(dataItem.date.getTime()), "minute").getTime()) {
+      //         target.verticalCenter = "middle";
+      //         target.horizontalCenter = "left";
+      //         return -90;
+      //     }
+      //     else {
+      //         target.verticalCenter = "bottom";
+      //         target.horizontalCenter = "middle";
+      //         return 0;
+      //     }
+      // })
 
       // bullet at the front of the line
       let bullet = series.createChild(am4charts.CircleBullet);

@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Device } from '../models/device';
-import { Devices } from '../models/mock-devices';
+import { isNgTemplate } from '@angular/compiler';
+
+export interface Item { name: string; }
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviceService {
-
-  constructor() { }
-
-  getDevices(): Observable<Device[]> {
-    // TODO: send the message _after_ fetching the heroes
-    return of(Devices);
+  deviceRecordCollection: AngularFirestoreCollection<Device>;
+  records: Observable<Device[]>;
+  constructor(private db:AngularFirestore) { 
+    this.records = this.db.collection('device').valueChanges();
   }
-
-  getDevice(id: number): Observable<Device> {
-    return of(Devices.find(device => device.id === id));
+  getDevices() {
+    return this.records;
   }
 }

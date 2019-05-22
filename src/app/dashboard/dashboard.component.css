@@ -12,3 +12,7 @@
     margin-top: 5px;
     margin-bottom: 10px;
 }
+
+.card [class*="card-header-"] .card-icon, .card [class*="card-header-"] .card-text {
+    padding: 10px;
+}

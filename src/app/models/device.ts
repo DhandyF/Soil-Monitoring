@@ -1,10 +1,9 @@
 import { Time } from "@angular/common";
 
-export class Device {
-    id: number;
-    record: {
-        temperature: number;
-        moisture: number;
-        last_retrieve: Date;
-    }[]
+export interface Device {
+    id?: number;
+    moisture?: number;
+    temperature?: number;
+    kalium?: number;
+    created_at?: Time;
 }

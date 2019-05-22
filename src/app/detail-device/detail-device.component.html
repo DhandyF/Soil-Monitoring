@@ -1,12 +1,57 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div *ngIf="device">
-            <h2>{{device.id | uppercase}} Details</h2>
-            <div><span>id: </span>{{device.id}}</div>
-            <div>
-                <p>Temperature : {{device.record[0].moisture}}</p>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">opacity</i>
+                        </div>
+                        <p class="card-category">Soil Moisture</p>
+                        <h3 class="card-title">{{device.moisture}}
+                            <small>%</small>
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Just Updated
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button (click)="goBack()">go back</button>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">wb_sunny</i>
+                        </div>
+                        <p class="card-category">Soil Temperature</p>
+                        <h3 class="card-title">{{device.temperature}} &#8451;
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Just Updated
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">terrain</i>
+                        </div>
+                        <p class="card-category">Kalium</p>
+                        <h3 class="card-title">{{device.kalium}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Just Updated
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

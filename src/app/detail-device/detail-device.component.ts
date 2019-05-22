@@ -25,13 +25,11 @@ export class DetailDeviceComponent implements OnInit {
 
   getDevice(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.deviceService.getDevice(id)
-      .subscribe(device => this.device = device);
+    this.deviceService.getDevices()
+      .subscribe(device => this.device = device.find(x => x.id === id)); 
   }
 
   goBack(): void {
     this.location.back();
   }
 }
-0.6056659 
-0.000168240527778

@@ -1,0 +1,12 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div *ngIf="device">
+            <h2>{{device.id | uppercase}} Details</h2>
+            <div><span>id: </span>{{device.id}}</div>
+            <div>
+                <p>Temperature : {{device.record[0].moisture}}</p>
+            </div>
+            <button (click)="goBack()">go back</button>
+        </div>
+    </div>
+</div>

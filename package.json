@@ -18,7 +18,11 @@
   "private": true,
   "dependencies": {
     "@agm/core": "1.0.0-beta.5",
+<<<<<<< HEAD
     "@amcharts/amcharts4": "^4.4.7",
+=======
+    "@amcharts/amcharts4": "^4.4.6",
+>>>>>>> ac0d95bfca20c8f66c6f53223362bdcac029667e
     "@amcharts/amcharts4-geodata": "^4.1.5",
     "@angular/animations": "7.0.2",
     "@angular/cdk": "7.0.2",

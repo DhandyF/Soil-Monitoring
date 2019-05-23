@@ -85,7 +85,11 @@ export class DashboardComponent implements OnInit {
       polygonTemplate.events.on("hit", function(ev) {
         this.router.navigate(['/device/',ev.target.dataItem.dataContext.id]);
         
+<<<<<<< HEAD
         // console.log(ev.target.dataItem.dataContext.id);
+=======
+        console.log(ev.target.dataItem.dataContext.id);
+>>>>>>> ac0d95bfca20c8f66c6f53223362bdcac029667e
       }, this);
 
       // Create hover state and set alternative fill color
